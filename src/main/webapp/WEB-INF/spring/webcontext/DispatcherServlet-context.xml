@@ -10,7 +10,7 @@
 
 
 	<mvc:annotation-driven />
-	<context:component-scan base-package="com.packt.webstore.controller" />
+	<context:component-scan base-package="com.instapost.controller" />
  	
 	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="prefix" value="/WEB-INF/views/" />

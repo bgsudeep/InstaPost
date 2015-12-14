@@ -1,4 +1,4 @@
-package com.packt.webstore.controller;
+package com.instapost.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
