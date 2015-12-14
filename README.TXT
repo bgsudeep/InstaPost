@@ -1,1 +1,2 @@
- USED as LAB for LESSON 10
+INSTA POST:
+Instantly post a news as we see.

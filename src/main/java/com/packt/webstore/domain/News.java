@@ -3,13 +3,14 @@ package com.packt.webstore.domain;
 import java.util.Date;
 
 import javax.persistence.CascadeType;
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -28,7 +29,7 @@ public class News {
 	
 	@NotEmpty
 	@Size(message="{Size.name.validation}")
-	private String desctiption;
+	private String description;
 
 //	@Transient
 //	private MultipartFile image;
@@ -43,13 +44,14 @@ public class News {
 	private Category category;
 	
 	@NotNull
-	@Column(columnDefinition="TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
+	@Temporal(TemporalType.TIMESTAMP)
+//	@Column(columnDefinition="TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
 	private Date postDate;
 	
 	@NotNull
 	private Date publishDate;
 	
-	@Column(columnDefinition="default 0")
+//	@Column(columnDefinition="default 0")
 	private boolean isPublish;
 
 	public Long getId() {
@@ -69,11 +71,11 @@ public class News {
 	}
 
 	public String getDesctiption() {
-		return desctiption;
+		return description;
 	}
 
 	public void setDesctiption(String desctiption) {
-		this.desctiption = desctiption;
+		this.description = desctiption;
 	}
 
 //	@XmlTransient
