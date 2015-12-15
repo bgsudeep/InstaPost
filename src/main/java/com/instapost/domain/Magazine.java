@@ -28,7 +28,7 @@ public class Magazine {
 	@NotEmpty
 	private String title;
 	
-	@Null
+	//@Null
 	@OneToMany(fetch = FetchType.LAZY, cascade=CascadeType.ALL)
 	@JoinColumn(name="news_id")
 	private List<News> newsList = new ArrayList<News>();
@@ -37,7 +37,7 @@ public class Magazine {
 	@JoinColumn(name="user_id")
 	private User user;
 	
-	@NotNull
+//	@NotNull
 	@Column(columnDefinition="TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
 	private Date postDate;
 

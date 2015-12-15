@@ -12,7 +12,7 @@
       http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
       http://www.springframework.org/schema/data/jpa http://www.springframework.org/schema/data/jpa/spring-jpa.xsd">
  
- <jpa:repositories base-package="com.instapost.repository" />
+ <jpa:repositories base-package="com.instapost.repositories" />
  
    <bean id="entityManager" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
       <property name="dataSource" ref="dataSource" />
@@ -22,7 +22,7 @@
       </property>
       <property name="jpaProperties">
          <props>
-            <prop key="hibernate.hbm2ddl.auto">create</prop>
+            <prop key="hibernate.hbm2ddl.auto">update</prop>
             <prop key="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect</prop>
              <!-- <prop key="hibernate.hbm2ddl.import_files">populate.sql</prop> -->
          </props>
@@ -45,7 +45,7 @@
    <!-- Scan for  transaction-based resources -->
    	<context:component-scan base-package="com.instapost.service" />
     	<context:component-scan base-package="com.instapost.domain" />
-    	<context:component-scan base-package="com.instapost.repository" />
+    	<context:component-scan base-package="com.instapost.repositories" />
      
    <tx:annotation-driven transaction-manager="transactionManager"/>
  
