@@ -17,10 +17,11 @@ public class User {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long id;
 	
+	private boolean enabled;
+	
 	@NotEmpty
 	@Size(min=6, message="{Size.email.validation}")
 	private String email;
-	
 	
 	@NotEmpty
 	@Size(min=6, message="{Size.password.validation}")
@@ -83,6 +84,14 @@ public class User {
 
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
+	}
+	
+	public boolean isEnabled() {
+		return enabled;
+	}
+
+	public void setEnabled(boolean enabled) {
+		this.enabled = enabled;
 	}
 	
 }

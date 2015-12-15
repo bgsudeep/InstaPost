@@ -12,8 +12,7 @@
 	<section>
 		<div class="jumbotron">
 			<div class="container">
-				<h1>Valued Employees</h1>
-				<p>Add a new one<p>
+				<p>Add a new user<p>
 			</div>
 		</div>
 	</section>
