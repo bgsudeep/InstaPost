@@ -5,7 +5,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
+import javax.validation.Valid;
 import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.NotEmpty;
@@ -17,33 +19,28 @@ public class User {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long id;
 	
+	private boolean enabled;
+	
 	@NotEmpty
-	@Size(min=6, message="{Size.email.validation}")
+	@Size(min=3, message="{Size.email.validation}")
 	private String email;
 	
-	
 	@NotEmpty
-	@Size(min=6, message="{Size.password.validation}")
+	@Size(min=3, message="{Size.password.validation}")
 	private String password;
 	
 	@NotEmpty
-	@Size(min=6, message="{Size.firstName.validation}")
+	@Size(min=3, message="{Size.firstName.validation}")
 	private String firstName;
 
 	@NotEmpty
-	@Size(min=6, message="{Size.lastName.validation}")
+	@Size(min=3, message="{Size.lastName.validation}")
 	private String lastName;
 	
-	@OneToOne(cascade=CascadeType.ALL)
+	@Valid
+	@JoinColumn(name="role_id")
+	@OneToOne(cascade=CascadeType.MERGE)
 	private Role role; 
-
-	public Role getRole() {
-		return role;
-	}
-
-	public void setRole(Role role) {
-		this.role = role;
-	}
 
 	public Long getId() {
 		return id;
@@ -83,6 +80,22 @@ public class User {
 
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
+	}
+	
+	public boolean isEnabled() {
+		return enabled;
+	}
+
+	public void setEnabled(boolean enabled) {
+		this.enabled = enabled;
+	}
+
+	public Role getRole() {
+		return role;
+	}
+
+	public void setRole(Role role) {
+		this.role = role;
 	}
 	
 }
