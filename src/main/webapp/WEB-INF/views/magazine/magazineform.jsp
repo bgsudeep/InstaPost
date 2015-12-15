@@ -10,7 +10,7 @@
 </head>
 <body>
 
-	<form:form modelAttribute="magazine" action="addmagazine" method="POST">
+	<form:form modelAttribute="magazine" action="add" method="POST">
 		<fieldset>
 			<legend> Add a Magazine</legend>
 			<p>

@@ -24,14 +24,14 @@ public class MagazineController {
 	MagazineService magazineService;
 
 	// add magazine
-	@RequestMapping(value = { "/addmagazine", "/" }, method = RequestMethod.GET)
+	@RequestMapping(value = { "/add"}, method = RequestMethod.GET)
 	public String magazineFormDisplay(@ModelAttribute("magazine") Magazine newMazine) {
 
 		return "magazine/magazineform";
 
 	}
 
-	@RequestMapping(value = "/addmagazine", method = RequestMethod.POST)
+	@RequestMapping(value = "/add", method = RequestMethod.POST)
 	public String magazineFormProcess(@Valid @ModelAttribute("magazine") Magazine magazine, BindingResult result) {
 		if (result.hasErrors()) {
 			return "magazine/magazineform";
@@ -39,21 +39,21 @@ public class MagazineController {
 		}
 
 		magazineService.saveMagazine(magazine);
-		return "redirect:/magazine/saveMagazine";
-
-	}
-
-	@RequestMapping(value = "/saveMagazine", method = RequestMethod.GET)
-	public String magazineSave(@ModelAttribute("magazine") Magazine newMazine) {
-
 		return "redirect:/magazine/list";
 
 	}
 
+//	@RequestMapping(value = {"/", "/list"}, method = RequestMethod.GET)
+//	public String listMagazine(@ModelAttribute("magazine") Magazine newMazine) {
+//
+//		return "redirect:/magazine/list";
+//
+//	}
+
 	// edit magazine 
 	@RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
 	public String editMagazineform(@ModelAttribute("magazine") Magazine magazine, Model model,
-			@PathVariable("id") Integer id) {
+			@PathVariable("id") long id) {
 		magazine = magazineService.findoneMagazine(id);
 		model.addAttribute("magazine", magazine);
 
@@ -66,21 +66,21 @@ public class MagazineController {
 			return "magazine/magazineEditForm";
 		}
 		magazineService.saveMagazine(magazine);
-		return "redirect:/magazine/editsaveMagazine";
-
-	}
-
-	@RequestMapping(value = "/editsaveMagazine", method = RequestMethod.GET)
-	public String editMagazineSave(@ModelAttribute("magazine") Magazine newMazine) {
-
 		return "redirect:/magazine/list";
 
 	}
 
+//	@RequestMapping(value = "/editsaveMagazine", method = RequestMethod.GET)
+//	public String editMagazineSave(@ModelAttribute("magazine") Magazine newMazine) {
+//
+//		return "redirect:/magazine/list";
+//
+//	}
+
 	// delete magazine 
 
 	@RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
-	public String deleteMagazine(Model model, @PathVariable("id") Integer magzineId) {
+	public String deleteMagazine(Model model, @PathVariable("id") long magzineId) {
 		magazineService.deleteMagazine(magzineId);
 
 		return "redirect:/magazine/list";
@@ -88,7 +88,7 @@ public class MagazineController {
 
 	// List magazine
 
-	@RequestMapping(value = "/list", method = RequestMethod.GET)
+	@RequestMapping(value = {"/", "/list"}, method = RequestMethod.GET)
 	public String listMagazine(@ModelAttribute("magazine") Magazine magazine, Model model) {
 
 		List<Magazine> magazineList = new ArrayList<Magazine>();
@@ -98,7 +98,7 @@ public class MagazineController {
 	}
 
 	@RequestMapping(value = "/newsList/{id}", method = RequestMethod.GET)
-	public String listNewsOfMagazine(Model model, @PathVariable("id") Integer magzineId) {
+	public String listNewsOfMagazine(Model model, @PathVariable("id") long magzineId) {
 
 		Magazine magazine = magazineService.findoneMagazine(magzineId);
 		model.addAttribute("magazine", magazine);

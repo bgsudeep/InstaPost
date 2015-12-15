@@ -23,7 +23,7 @@ import org.hibernate.validator.constraints.NotEmpty;
 public class Magazine {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int id;
+	private Long id;
 	
 	@NotEmpty
 	private String title;
@@ -41,11 +41,11 @@ public class Magazine {
 	@Column(columnDefinition="TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
 	private Date postDate;
 
-	public int getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 

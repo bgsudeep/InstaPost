@@ -10,9 +10,9 @@ public interface MagazineService {
 
 	public Magazine editMagazine(Magazine magazine);
 	public List<Magazine> listMagazine();
-	public void deleteMagazine(Integer magzineId );
+	public void deleteMagazine(long magzineId );
 
-	public Magazine findoneMagazine(Integer magzineId);
+	public Magazine findoneMagazine(long magzineId);
 
 	
 }

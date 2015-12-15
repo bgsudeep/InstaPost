@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.instapost.domain.Magazine;
-import com.instapost.repositories.MagazineRepository;
+import com.instapost.repository.MagazineRepository;
 import com.instapost.service.MagazineService;
 
 @Service
@@ -20,12 +20,8 @@ public class MagazineServiceImpl implements MagazineService {
 
 	@Override
 	public void saveMagazine(Magazine magazine) {
-
 		magazineRepository.save(magazine);
-
 	}
-
-
 
 	@Override
 	public List<Magazine> listMagazine() {
@@ -37,7 +33,7 @@ public class MagazineServiceImpl implements MagazineService {
 	}
 
 	@Override
-	public void deleteMagazine(Integer magzineId) {
+	public void deleteMagazine(long magzineId) {
 
 		magazineRepository.delete(magzineId);
 
@@ -54,7 +50,7 @@ public class MagazineServiceImpl implements MagazineService {
 
 
 	@Override
-	public Magazine findoneMagazine(Integer magzineId) {
+	public Magazine findoneMagazine(long magzineId) {
 		magazineRepository.findOne(magzineId);
 		
 		
