@@ -34,10 +34,4 @@ public class HomeController {
 		return "welcome";
 	}
 	
-	@RequestMapping(value = "/adduser", method = RequestMethod.GET)
-	public String addUser(){
-		return "user/addUser";
-	}
-	
-	
 }
