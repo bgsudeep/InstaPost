@@ -1,0 +1,1 @@
+<p>&copy; S Quartet 2015</p>

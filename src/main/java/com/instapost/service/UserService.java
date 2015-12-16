@@ -10,6 +10,5 @@ public interface UserService {
 	public List<User> findAll();
 	public User findById(long id);
 	public User findUserByEmail(String email);
-	public void delete(User user);
-	
+	public void delete(User user);	
 }

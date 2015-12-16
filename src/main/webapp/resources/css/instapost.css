@@ -4,3 +4,32 @@
 	font-size: 16px;
 }
 
+<<<<<<< HEAD
+=======
+.header {
+	background-color: #EFEFEF;
+	height: 70px;
+	padding: 10px;
+}
+
+.header-title {
+	float: left;
+	margin-right:10px;
+}
+
+.header-sub {
+	margin-top: 12px;
+	float: right;
+}
+.main {
+	clear:both;	
+	background-color: #FBFBFB;
+	padding:10px;
+}
+
+ul li {
+	list-style:none;
+	float:left;
+	margin-right:10px;
+}
+>>>>>>> badbb4f847b047b8c0c7f7c13df1734a25a6281c

@@ -136,13 +136,14 @@ package com.instapost.domain;
 import java.util.Date;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.OneToOne;
-import javax.validation.constraints.Null;
 import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.NotEmpty;
@@ -159,10 +160,13 @@ public class News {
 	private String title;
 	
 	@NotEmpty
-	@Size(message="{Size.name.validation}")
+//	@Size(min=1, max=2500, message="{Size.name.validation}")
+
+	@Lob
+	@Column(columnDefinition = "TEXT", length=10000)
 	private String description;
 
-	@OneToOne(cascade=CascadeType.ALL)
+	@OneToOne(cascade=CascadeType.MERGE)
 	@JoinColumn(name="user_id")
 	private User user;
 	

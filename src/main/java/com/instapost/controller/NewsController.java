@@ -31,6 +31,9 @@ public class NewsController {
 
 	@Autowired
 	CategoryService categoryService;
+	
+	@Autowired
+	UserService userService;
 
 	@RequestMapping(value = "/add", method = RequestMethod.GET)
 	public String addNews(@ModelAttribute("newNews") News news, Model model) {
@@ -47,22 +50,18 @@ public class NewsController {
 			model.addAttribute("categories", categories);
 			return "news/addNews";
 		}
-		UserService userService = new UserServiceImpl();
+
 		User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		com.instapost.domain.User userProfile = userService.findUserByEmail("sagar.giri95@gmail.com");
-		com.instapost.domain.User userProfile2 = userService.findUserByEmail("guest@gmail.com");
+		com.instapost.domain.User userProfile = userService.findUserByEmail(user.getUsername());
 		news.setUser(userProfile);
 		
-		System.out.println(user.getUsername());
-		System.out.println(news);
 		newsService.addNews(news);
 		return "redirect:/news/list";
 	}
 
-	@RequestMapping(value = "/list", method = RequestMethod.GET)
+	@RequestMapping(value = {"/list", "/"}, method = RequestMethod.GET)
 	public String listNews(Model model) {
-		model.addAttribute("category", newsService.listNews());
+		model.addAttribute("listNews", newsService.listPublishedNews());
 		return "news/listNews";
 	}
-
 }
