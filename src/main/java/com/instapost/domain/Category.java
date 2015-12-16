@@ -15,7 +15,7 @@ public class Category {
 	private Long id;
 	
 	@NotEmpty
-	@Size(min=4, max=50, message="{Size.title.validation}")
+	@Size(min=4, max=50, message="{Size.title}")
 	private String title;
 
 	public Long getId() {

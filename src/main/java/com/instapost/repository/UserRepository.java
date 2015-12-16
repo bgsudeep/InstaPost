@@ -11,4 +11,7 @@ import com.instapost.domain.User;
 public interface UserRepository extends CrudRepository<User, Long>{
 	@Query("select u from USER u where u.email=:email")
 	public User findUserByEmail(@Param("email") String email);
+	
+	@Query("select u from USER u where u.firstName=:fname")
+	public User findUserByFirstName(@Param("fname") String firstName);
 }
