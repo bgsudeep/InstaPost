@@ -33,7 +33,7 @@ public class UserServiceImpl implements UserService{
 	}
 
 	@Override
-	public User findByEmail(String email) {
+	public User findUserByEmail(String email) {
 		return (User) userRepository.findUserByEmail(email);
 	}
 
@@ -41,4 +41,10 @@ public class UserServiceImpl implements UserService{
 	public void delete(User user) {
 		userRepository.delete(user);
 	}
+
+	@Override
+	public User findUserByFirstName(String fName) {
+		return (User) userRepository.findUserByFirstName(fname);
+	}
+	
 }
