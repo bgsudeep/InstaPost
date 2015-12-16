@@ -8,8 +8,10 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.instapost.domain.Category;
 import com.instapost.service.CategoryService;
@@ -32,14 +34,21 @@ public class CategoryController {
 
 	}
 
+//	@RequestMapping(value = "/addCategory", method = RequestMethod.POST)
+//	public String saveCategory(@Valid @ModelAttribute("addCategoryForm") Category category,BindingResult result) {
+//		if(result.hasErrors()){
+//			return "category/addCategory";
+//			
+//		}
+//		categoryService.addCategory(category);
+//		return "redirect:/listCategory";
+//	}
+	
 	@RequestMapping(value = "/addCategory", method = RequestMethod.POST)
-	public String saveCategory(@Valid @ModelAttribute("addCategoryForm") Category category,BindingResult result) {
-		if(result.hasErrors()){
-			return "category/addCategory";
-			
-		}
-		categoryService.addCategory(category);
-		return "redirect:/listCategory";
+	public @ResponseBody Category saveCategory(@Valid @RequestBody Category category) {
+		
+		return categoryService.addCategory(category);
+		 
 	}
 
 	@RequestMapping(value = "/category_edit/{id}", method = RequestMethod.GET)
@@ -59,9 +68,19 @@ public class CategoryController {
 		
 	}
 	
-	@RequestMapping(value="/category_delete/{id}", method=RequestMethod.GET)
-	public String deleteCategory(@ModelAttribute("addCategoryForm") Category category,@PathVariable("id") long id){
+//	@RequestMapping(value="/category_delete/{id}", method=RequestMethod.GET)
+//	public String deleteCategory(Category category,@PathVariable("id") long id){
+//		System.out.println(category.toString());
+//		categoryService.deleteCategory(category);
+//		
+//		return "redirect:/listCategory";		
+//	}
+	
+	@RequestMapping(value="/category_delete/{id}", method=RequestMethod.DELETE)
+	public @ResponseBody boolean deleteCategory(Category category,@PathVariable("id") long id){
+		category.setId(id);
 		categoryService.deleteCategory(category);
-		return "redirect:/listCategory";		
+		return true;
+			
 	}
 }
