@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
+<%@ page contentType="text/html;charset=UTF-8" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
@@ -13,17 +12,19 @@
 <title>Add Category</title>
 </head>
 <body>
+<a href="?language=en">English</a>|
+	<a href="?language=ne">Nepali</a>
 	<div class="addform">
 	<h1>Add the Category</h1>
 		<form:form modelAttribute="addCategoryForm" Method="POST">
 			<div>
-				<label for="categoryTitle">Category Title:</label>
+				<label for="categoryTitle"><spring:message code="category.categorytitle.internationalization" /></label>
 				<form:input type="text" path="title" />
 				<form:errors path="title" cssClass="error"/>
 				<br />
 			</div>
 
-			<input type="submit" value="Add Category" />
+			<input type="submit" value="<spring:message code="category.addCategory.internationalization" />" />
 
 		</form:form>
 	</div>

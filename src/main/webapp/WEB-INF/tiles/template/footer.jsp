@@ -1,1 +1,1 @@
-<p>&copy; Company 2014</p>
+<p>&copy; S Quartet 2015</p>

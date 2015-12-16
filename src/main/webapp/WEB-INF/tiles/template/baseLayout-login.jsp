@@ -22,14 +22,14 @@
 	<div class="container">
 		<div class="header">
 			<div class="header-title">
-				<img src="<c:url value="/resource/images/LOGO.png"/>" width="70px">
+				<img src="resource/images/LOGO.png" width="70px">
 				
 			</div>
 			<div class="header-title"><h1>InstaPost</h1></div>
 			<div class="header-sub">
-				<ul class="">
+				<%-- <ul class="">
 					<tiles:insertAttribute name="navigation" />
-				</ul>
+				</ul> --%>
 			</div>
 
 		</div>
