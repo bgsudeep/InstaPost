@@ -23,12 +23,12 @@ import org.hibernate.validator.constraints.NotEmpty;
 public class Magazine {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int id;
+	private Long id;
 	
 	@NotEmpty
 	private String title;
 	
-	@Null
+	//@Null
 	@OneToMany(fetch = FetchType.LAZY, cascade=CascadeType.ALL)
 	@JoinColumn(name="news_id")
 	private List<News> newsList = new ArrayList<News>();
@@ -37,15 +37,15 @@ public class Magazine {
 	@JoinColumn(name="user_id")
 	private User user;
 	
-	@NotNull
+//	@NotNull
 	@Column(columnDefinition="TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
 	private Date postDate;
 
-	public int getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 

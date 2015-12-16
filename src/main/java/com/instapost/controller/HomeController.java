@@ -16,16 +16,7 @@ public class HomeController {
 		model.addAttribute("greeting", "Welcome to the Lone Ranger Company, Kimosabe!!");
 		model.addAttribute("tagline", "The one and only place to work, so you can live and play!!");
 
-/*
- 		Customer c = new Customer();
-
-		c.setLastName("Dreamer");
-		c.setFirstName("Freddy");
- 		c.setAge(15);
-*/		
- 		
-//		customerService.save(c);
-		
+	
 		return "welcome";
 	}
 	

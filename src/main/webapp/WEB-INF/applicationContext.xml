@@ -45,7 +45,7 @@
    <!-- Scan for  transaction-based resources -->
    	<context:component-scan base-package="com.instapost.service" />
     	<context:component-scan base-package="com.instapost.domain" />
-    	<context:component-scan base-package="com.instapost.repository" />
+    	<context:component-scan base-package="com.instapost.repositories" />
      
    <tx:annotation-driven transaction-manager="transactionManager"/>
  
