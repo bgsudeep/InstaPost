@@ -24,9 +24,7 @@ public class NewsServiceImpl implements NewsService{
 
 	@Override
 	public java.util.List<News> listNews() {
-		// TODO Auto-generated method stub
-		return (List<News>) newsRepository.findAll();
-		
+		return (List<News>) newsRepository.findAll();		
 	}
 
 	@Override
@@ -43,5 +41,15 @@ public class NewsServiceImpl implements NewsService{
 	public News deleteNews(News news) {
 		newsRepository.delete(news);
 		return null;
+	}
+
+	@Override
+	public List<News> listPublishedNews() {
+		return (List<News>) newsRepository.findPublishedNews();
+	}
+
+	@Override
+	public List<News> listUnPublishedNews() {
+		return (List<News>) newsRepository.findUnPublishedNews();
 	}
 }

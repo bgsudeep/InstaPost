@@ -13,7 +13,7 @@
 </head>
 <body>
 	<div class="addform">
-	<h1>Add the Category</h1>
+	<h1>Add News</h1>
 		<form:form modelAttribute="newNews" Method="POST">
 		<table>
 			<tr>
@@ -33,7 +33,8 @@
 		        <td><label for="description"></label>Description:</td>
 		        <td>
 		            <form:errors path="description" cssClass="error" />
-		            <form:input path="description" id="description" />
+		            <form:textarea path="description" id="description"  rows="5" cols="30" />
+		            
 		        </td>
 		    </tr>
 		    <tr>
@@ -51,7 +52,7 @@
 		     <tr>
 		        <td>&nbsp;</td>
 		        <td>
-		            <input type="submit" value="Add Category" />
+		            <input type="submit" value="Post" />
 		        </td>
 		    </tr>		
 		</table>

@@ -12,10 +12,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Null;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
@@ -30,7 +29,8 @@ public class Magazine {
 	
 	//@Null
 	@OneToMany(fetch = FetchType.LAZY, cascade=CascadeType.ALL)
-	@JoinColumn(name="news_id")
+	@JoinTable
+	@JoinColumn(name="id")
 	private List<News> newsList = new ArrayList<News>();
 	
 	@OneToOne(cascade=CascadeType.ALL)
