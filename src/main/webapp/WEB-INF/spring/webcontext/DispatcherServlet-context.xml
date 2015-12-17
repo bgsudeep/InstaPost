@@ -39,6 +39,11 @@
 	  <property name="maxUploadSize" value="10240000"/>
 	</bean>
 	
+	<bean id="messageAccessor"
+		class="org.springframework.context.support.MessageSourceAccessor">
+		<constructor-arg ref="messageSource" />
+	</bean>
+
 	<mvc:interceptors>
 		<bean class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor">
 			<property name="paramName" value="language" />
@@ -51,7 +56,6 @@
 	</bean>
 
 	<mvc:resources location="/resources/" mapping="/resource/**" />
-
 	<bean id="tilesConfigurer"
 		class="org.springframework.web.servlet.view.tiles3.TilesConfigurer">
 		<property name="definitions">

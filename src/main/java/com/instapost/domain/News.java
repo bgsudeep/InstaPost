@@ -143,6 +143,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlTransient;
@@ -169,7 +170,7 @@ public class News {
 	@Column(columnDefinition = "TEXT", length=10000)
 	private String description;
 
-	@OneToOne(cascade=CascadeType.MERGE)
+	@OneToOne(cascade=CascadeType.MERGE, orphanRemoval = true)
 	@JoinColumn(name="user_id")
 	private User user;
 	
@@ -182,6 +183,17 @@ public class News {
 	
 	private boolean isPublish;
 	
+	@ManyToOne
+	private Magazine magazine;
+	
+	public Magazine getMagazine() {
+		return magazine;
+	}
+
+	public void setMagazine(Magazine magazine) {
+		this.magazine = magazine;
+	}
+
 	private Date publishDate =  new Date();
 
 	public Long getId() {

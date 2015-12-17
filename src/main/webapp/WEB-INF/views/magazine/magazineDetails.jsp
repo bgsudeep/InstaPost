@@ -10,30 +10,28 @@
 </head>
 <body>
 
-
-
-
-
-
+	
+	<div align="right">
+			<a href="<spring:url value='add'/>">Add Magazine</a>
+		</div>
+	
 	<table>
 		<tr style="width: 100%; border: 1px; border-color: solid:black;">
-			<th>ID</th>
-			<th>Post Date</th>
 			<th>Title</th>
+			<th>Post Date</th>
 			<th>User Id</th>
 			<th>Action</th>
 		</tr>
 		<c:forEach items="${magazineList}" var="magazine">
 		
-				<spring:url value="newsList/{id}" var="listNewsOfMagazine">
+				<spring:url value="{id}/news" var="listNewsOfMagazine">
 					<spring:param name="id" value="${magazine.id}" />
 				</spring:url>
 			<tr>
-				<td>${magazine.id}</td>
-				<td>${magazine.postDate}</td>
-				<td>
-				<a href="${listNewsOfMagazine}">
+				<td><a href="${listNewsOfMagazine}">
 				${magazine.title}</a></td>
+				<td>${magazine.postDate}
+				</td>
 				<td>${magazine.user.id}</td>
 
 

@@ -12,7 +12,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
@@ -23,22 +22,26 @@ public class Magazine {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
-	
+
 	@NotEmpty
 	private String title;
-	
-	//@Null
-	@OneToMany(fetch = FetchType.LAZY, cascade=CascadeType.ALL)
-	@JoinTable
-	@JoinColumn(name="id")
-	private List<News> newsList = new ArrayList<News>();
-	
-	@OneToOne(cascade=CascadeType.ALL)
-	@JoinColumn(name="user_id")
+
+	// @Null
+	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	// @JoinTable
+	@JoinColumn(name = "magazine_id")
+	private List<News> news;
+
+	public Magazine() {
+		news = new ArrayList<News>();
+	}
+
+	@OneToOne(cascade = CascadeType.MERGE)
+	@JoinColumn(name = "user_id")
 	private User user;
-	
-//	@NotNull
-	@Column(columnDefinition="TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
+
+	// @NotNull
+	@Column(columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
 	private Date postDate;
 
 	public Long getId() {
@@ -49,6 +52,18 @@ public class Magazine {
 		this.id = id;
 	}
 
+	public void addNews(News news) {
+		news.setMagazine(this);
+	}
+
+	public List<News> getNews() {
+		return news;
+	}
+
+	public void setNews(List<News> news) {
+		this.news = news;
+	}
+
 	public String getTitle() {
 		return title;
 	}
@@ -57,22 +72,14 @@ public class Magazine {
 		this.title = title;
 	}
 
-	public List<News> getNewsList() {
-		return newsList;
-	}
-
-	public void setNewsList(List<News> newsList) {
-		this.newsList = newsList;
-	}
-
 	public User getUser() {
 		return user;
 	}
-	
+
 	public void setUser(User user) {
 		this.user = user;
 	}
-	
+
 	public Date getPostDate() {
 		return postDate;
 	}

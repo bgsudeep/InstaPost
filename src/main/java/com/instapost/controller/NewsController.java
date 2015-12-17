@@ -1,5 +1,6 @@
 package com.instapost.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -12,16 +13,18 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.instapost.domain.Category;
+import com.instapost.domain.Magazine;
 import com.instapost.domain.News;
 import com.instapost.exception.CategoryNotFoundException;
 import com.instapost.service.CategoryService;
+import com.instapost.service.MagazineService;
 import com.instapost.service.NewsService;
 import com.instapost.service.UserService;
-import com.instapost.service.impl.UserServiceImpl;
 
 @Controller
 @RequestMapping("/news")
@@ -35,6 +38,9 @@ public class NewsController {
 	
 	@Autowired
 	UserService userService;
+	
+	@Autowired
+	MagazineService magazineService;
 
 	@RequestMapping(value = "/add", method = RequestMethod.GET)
 	public String addNews(@ModelAttribute("newNews") News news, Model model) {
@@ -64,8 +70,32 @@ public class NewsController {
 	}
 
 	@RequestMapping(value = {"/list", "/"}, method = RequestMethod.GET)
-	public String listNews(Model model) {
-		model.addAttribute("listNews", newsService.listPublishedNews());
+	public String listNews(@ModelAttribute("newNews") News news, Model model) {
+		List<News> newsList = newsService.listPublishedNews();
+
+		User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		com.instapost.domain.User userProfile = userService.findUserByEmail(user.getUsername());
+		
+		
+		List<Magazine> magazineList = new ArrayList<Magazine>();
+		List<Magazine> magazines = magazineService.listMagazine();
+		for (Magazine _magazine : magazines) {
+			if(_magazine.getUser().getId() == userProfile.getId()) {
+				magazineList.add(_magazine);
+			}
+		}
+		
+		model.addAttribute("listNews", newsList);
+		model.addAttribute("listMagazines", magazineList);
+		
 		return "news/listNews";
+	}
+	
+	@RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
+	public String deleteNews(Model model, @PathVariable("id") Long newsId) {
+//		News news = newsService.getNewsById(newsId);
+		newsService.deleteNews(newsId);
+
+		return "redirect:/news/list";
 	}
 }

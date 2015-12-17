@@ -10,7 +10,7 @@
 </head>
 <body>
 
-	<c:url var="saveAction" value="/user/save"></c:url>
+	<c:url var="saveAction" value="/register"></c:url>
 
 	<c:set var="addEdit" value="Add a new " />
 
@@ -35,7 +35,7 @@
 
 
 			<form:input type="hidden" path="id" name="id" />
-			<form:errors path="*" cssClass="alert alert-danger" element="div" />
+			<%-- <form:errors path="*" cssClass="alert alert-danger" element="div" /> --%>
 
 			<div class="form-group">
 				<label class="control-label col-lg-2" for="firstName">First
@@ -88,21 +88,15 @@
 			</div>
 
 			<div class="form-group">
-
+				<label class="control-label col-lg-2" for="Role">Role</label>
 				<div class="col-lg-10">
 					<div class="form:input-prepend">
-						<%-- <form:option id="id" path="role.id" type="hidden" value="2" selected /> --%>
-						<%-- <form:select path="role">
-							<c:forEach items="${roles}" var="role">
-								<form:option value="${role}"
-									selected="${role == selectedRole ? 'selected' : ''}">${role.name} </form:option>
-							</c:forEach>
-						</form:select> --%>
 
 						<form:select path="role.id">
-							<form:option value="0"> --SELECT--</form:option>
+							<form:option value="NONE"> --SELECT--</form:option>
 							<form:options items="${roles}" itemLabel="name" itemValue="id" />
 						</form:select>
+						<form:errors path="role.id" cssClass="text-danger" />
 					</div>
 				</div>
 			</div>
