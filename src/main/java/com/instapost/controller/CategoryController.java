@@ -59,7 +59,6 @@ public class CategoryController {
 		model.addAttribute("updateCategory", category);
 
 		return "category/updateCategoryForm";
-
 	}
 	
 	@RequestMapping(value="/edit/{id}", method = RequestMethod.POST)

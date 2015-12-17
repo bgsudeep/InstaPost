@@ -146,8 +146,11 @@ import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.validation.constraints.Size;
+import javax.xml.bind.annotation.XmlTransient;
 
+import org.codehaus.jackson.annotate.JsonIgnore;
 import org.hibernate.validator.constraints.NotEmpty;
+import org.springframework.web.multipart.MultipartFile;
 
 @Entity(name="NEWS")
 public class News {
@@ -160,9 +163,9 @@ public class News {
 	@Size(min=2, max=15, message="{Size.name.validation}")
 	private String title;
 	
-	@NotEmpty
 //	@Size(min=1, max=2500, message="{Size.name.validation}")
 
+	@NotEmpty
 	@Lob
 	@Column(columnDefinition = "TEXT", length=10000)
 	private String description;
@@ -256,7 +259,5 @@ public class News {
 	public void setPublish(boolean isPublish) {
 		this.isPublish = isPublish;
 	}
-	
-	
 }
 

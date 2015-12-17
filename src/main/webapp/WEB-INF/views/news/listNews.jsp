@@ -31,11 +31,12 @@
 		</c:forEach>
 
 	</ul>
-	<security:authorize access="hasRole('ROLE_USER')">
 		<div align="right">
 			<a href="<spring:url value='add' />"> <b>Add News</b>
 			</a>
 		</div>
+	<security:authorize access="hasRole('ROLE_USER')">
+	
 	</security:authorize>
 	<hr>
 	<div class="list">
