@@ -46,36 +46,37 @@
 						<h3>${news.title}</h3>
 
 					</td>
-
-					<security:authentication var="principal" property="principal" />
-
-					<security:authorize access="hasRole('ROLE_USER')">
-						<%-- <c:if test="${news.user.email eq principal.username }"> --%>
+					<td width="30%" align="right"><security:authentication
+							var="principal" property="principal" /> <security:authorize
+							access="hasRole('ROLE_USER')">
+							<%-- <c:if test="${news.user.email eq principal.username }"> --%>
 							<c:if test="${!empty listMagazines}">
-							<form:form method="POST" action="/InstaPost/magazine/news/add">
-								<input type="hidden" name="newsId" value='${news.id}' />
-								<select
-									name="magazineId">
-									<c:forEach items="${listMagazines}" var="magazine">
-										<option value="${magazine.id}"
-											${magazine == selectedMagazine ? 'selected' : ''}>${magazine.title}</option>
-									</c:forEach>
-								</select>
-								<input type="submit" value="Add">
-							</form:form>
+								<form:form method="POST" action="/InstaPost/magazine/news/add">
+									<input type="hidden" name="newsId" value='${news.id}' />
+									<select name="magazineId">
+										<c:forEach items="${listMagazines}" var="magazine">
+											<option value="${magazine.id}"
+												${magazine == selectedMagazine ? 'selected' : ''}>${magazine.title}</option>
+										</c:forEach>
+									</select>
+									<input type="submit" value="Add">
+								</form:form>
 							</c:if>
 
-							<td width="30%" align="right"><spring:url
-									value="/news/edit/{id}" var="edit">
-									<spring:param name="id" value="${news.id}" />
-								</spring:url> <a href="${edit}">Edit</a>&nbsp; &nbsp; <spring:url
-									value="/news/delete/{id}" var="delete">
-									<spring:param name="id" value="${news.id}" />
-								</spring:url> <a href="${delete}"
-								onclick="return confirm('Are you sure want to delete');">Delete</a>
-							</td>
-							
-						<%-- </c:if> --%>
+
+
+
+							<spring:url value="/news/edit/{id}" var="edit">
+								<spring:param name="id" value="${news.id}" />
+							</spring:url>
+							<a href="${edit}">Edit</a>&nbsp; &nbsp; <spring:url
+								value="/news/delete/{id}" var="delete">
+								<spring:param name="id" value="${news.id}" />
+							</spring:url>
+							<a href="${delete}"
+								onclick="return confirm('Are you sure want to delete');">Delete</a></td>
+
+					<%-- </c:if> --%>
 					</security:authorize>
 
 					<security:authorize access="hasRole('ROLE_ADMIN')">

@@ -43,7 +43,7 @@ public class ProfileController {
 	public String registerUser(@Valid @ModelAttribute("user") User user, BindingResult result, Model model) {
 		
 		if(user.getId() == null) {
-			//new employee, add it
+			
 			
 			if(result.hasErrors()) {
 				List<Role> roles = new ArrayList<Role>();
