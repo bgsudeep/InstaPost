@@ -60,11 +60,10 @@ public class NewsController {
 			model.addAttribute("categories", categories);
 			return "news/addNews";
 		}
+		Category category = categoryService.getCategoryById(news.getCategory().getId());
+		news.setCategory(category);
+		newsService.addNews(news);
 
-		User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		com.instapost.domain.User userProfile = userService.findUserByEmail(user.getUsername());
-		news.setUser(userProfile);
-		
 		newsService.addNews(news);
 		return "redirect:/news/list";
 	}
@@ -79,7 +78,7 @@ public class NewsController {
 		model.addAttribute("newNews", news);
 		
 		model.addAttribute("categories", categories);
-		return "news/addNews";
+		return "news/editNews";
 	}
 	
 	@RequestMapping(value = "/edit/{id}", method = RequestMethod.POST)
@@ -89,7 +88,8 @@ public class NewsController {
 			model.addAttribute("categories", categories);
 			return "news/addNews";
 		}
-	
+		Category category = categoryService.getCategoryById(news.getCategory().getId());
+		news.setCategory(category);
 		newsService.addNews(news);
 		return "redirect:/news/list";
 	}
@@ -100,8 +100,7 @@ public class NewsController {
 
 		User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		com.instapost.domain.User userProfile = userService.findUserByEmail(user.getUsername());
-		
-		
+
 		List<Magazine> magazineList = new ArrayList<Magazine>();
 		List<Magazine> magazines = magazineService.listMagazine();
 		for (Magazine _magazine : magazines) {
@@ -122,10 +121,4 @@ public class NewsController {
 		return "redirect:/news/list";
 	}
 	
-//
-//	@RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
-//	public String deleteNews(Model model, @PathVariable("id") long id) {
-//		newsService.deleteNews(id);
-//		return "redirect:/magazine/list";
-//	}
 }

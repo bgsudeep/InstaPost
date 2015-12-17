@@ -9,9 +9,9 @@ import com.instapost.domain.Category;
 public interface CategoryService {
 	@PreAuthorize ("hasRole('ROLE_ADMIN')")
 	public Category addCategory(Category category);
-	@PreAuthorize ("hasRole('ROLE_ADMIN')")
+//	@PreAuthorize ("hasRole('ROLE_ADMIN')")
 	public List<Category> listCategory();
-	@PreAuthorize ("hasRole('ROLE_ADMIN')")
+//	@PreAuthorize ("hasRole('ROLE_ADMIN')")
 	public Category getCategoryById(Long id);
 	@PreAuthorize ("hasRole('ROLE_ADMIN')")
 	public Category updateCategory(Category category);
