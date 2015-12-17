@@ -51,7 +51,6 @@
 	</bean>
 
 	<mvc:resources location="/resources/" mapping="/resource/**" />
-
 	<bean id="tilesConfigurer"
 		class="org.springframework.web.servlet.view.tiles3.TilesConfigurer">
 		<property name="definitions">

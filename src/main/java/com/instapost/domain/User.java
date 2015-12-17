@@ -10,6 +10,7 @@ import javax.persistence.OneToOne;
 import javax.validation.Valid;
 import javax.validation.constraints.Size;
 
+import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity(name="USER")
@@ -22,6 +23,7 @@ public class User {
 	private boolean enabled;
 	
 	@NotEmpty
+	@Email
 	@Size(min=3, message="{Size.email.validation}")
 	private String email;
 	

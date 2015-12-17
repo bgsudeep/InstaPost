@@ -6,6 +6,7 @@ import java.util.List;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -14,8 +15,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.instapost.domain.Magazine;
+import com.instapost.domain.News;
 import com.instapost.domain.Role;
 import com.instapost.domain.User;
+import com.instapost.service.MagazineService;
+import com.instapost.service.NewsService;
 import com.instapost.service.RoleService;
 import com.instapost.service.UserService;
 
@@ -30,6 +35,12 @@ public class UserController {
 	
 	@Autowired
 	RoleService roleService;
+	
+	@Autowired
+	NewsService newsService;
+	
+	@Autowired
+	MagazineService magazineService;
 	
 	/*
 	 * GET request for the adding a new user
@@ -89,8 +100,24 @@ public class UserController {
 	 * @return addUpdateUser.jsp view
 	 */
 	@RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
-	public String editUser(@PathVariable("id") long userId, Model model) {
+	public String editUserWithId(@PathVariable("id") Long userId, Model model) {
+		
 		User user = userService.findById(userId);
+		List<Role> roles = new ArrayList<Role>();
+		roles.add(user.getRole());
+		model.addAttribute("roles", roles);
+		model.addAttribute("mode", "edit");
+		model.addAttribute("user", user);
+		
+		return "user/addUpdateUser";
+	}
+	
+	@RequestMapping(value = "/edit", method = RequestMethod.GET)
+	public String editUser(Model model) {
+		
+		org.springframework.security.core.userdetails.User _user = (org.springframework.security.core.userdetails.User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		User user = userService.findUserByEmail(_user.getUsername());
+		
 		List<Role> roles = new ArrayList<Role>();
 		roles.add(user.getRole());
 		model.addAttribute("roles", roles);
@@ -109,6 +136,28 @@ public class UserController {
 	@RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
 	public String deleteUser(@PathVariable("id") long userId, Model model) {
 		User user = userService.findById(userId);
+		user.setRole(null);
+		//find the news by this user
+		List<News> newsList = newsService.listNews();
+		
+		for (News news : newsList) {
+			if(news.getUser().getId() == userId) {
+				news.setUser(null);
+				newsService.addNews(news);
+				newsService.deleteNews(news.getId());
+			}
+		}
+		
+		//find the magazines by this user
+		List<Magazine> magazineList = magazineService.listMagazine();
+		for (Magazine magazine : magazineList) {
+			if(magazine.getUser().getId() == userId) {
+				magazine.setUser(null);
+				magazineService.saveMagazine(magazine);
+				magazineService.deleteMagazine(magazine.getId());
+			}
+		}
+		
 		
 		userService.delete(user);
 		

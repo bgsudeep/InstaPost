@@ -167,7 +167,7 @@ public class News {
 	@Column(columnDefinition = "TEXT", length=10000)
 	private String description;
 
-	@OneToOne(cascade=CascadeType.MERGE)
+	@OneToOne(cascade=CascadeType.MERGE, orphanRemoval = true)
 	@JoinColumn(name="user_id")
 	private User user;
 	
