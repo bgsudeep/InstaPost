@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.instapost.domain.Category;
 import com.instapost.domain.News;
+import com.instapost.exception.CategoryNotFoundException;
 import com.instapost.service.CategoryService;
 import com.instapost.service.NewsService;
 import com.instapost.service.UserService;
@@ -38,6 +39,9 @@ public class NewsController {
 	@RequestMapping(value = "/add", method = RequestMethod.GET)
 	public String addNews(@ModelAttribute("newNews") News news, Model model) {
 		List<Category> categories = categoryService.listCategory();
+		if(categories.isEmpty()){
+			throw new CategoryNotFoundException();
+		}
 		model.addAttribute("categories", categories);
 		return "news/addNews";
 	}

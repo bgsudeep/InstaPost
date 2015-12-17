@@ -34,6 +34,12 @@
 			access="hasRole('ROLE_ADMIN')" />
 		<security:intercept-url pattern="/members"
 			access="hasAnyRole('ROLE_ADMIN','ROLE_USER')" />
+			
+		<security:intercept-url pattern="/addCategory" access="hasRole('ROLE_ADMIN')"/>
+		<security:intercept-url pattern="/listCategory" access="hasRole('ROLE_ADMIN')"/>
+		<security:intercept-url pattern="/category_edit/*" access="hasRole('ROLE_ADMIN')"/>
+		<security:intercept-url pattern="/category_delete/*" access="hasRole('ROLE_ADMIN')"/>
+		
 		<!-- <security:intercept-url pattern="/login" access="isAnonymous()" requires-channel="https"/> 
 			<security:intercept-url pattern="/logout" access="isAnonymous()" requires-channel="http"/> -->
 		
