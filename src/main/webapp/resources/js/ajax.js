@@ -103,9 +103,9 @@ function createRefElement(val, ref, txt, id){
 
 	a.textContent = txt;
 	a.setAttribute('href', "#");
-	alert(a);
 	a.setAttribute('onclick', "deleteCategory("+id+")");	
 	$(val).append(a);
 	console.log(a);
 	console.log(a);
 }
+

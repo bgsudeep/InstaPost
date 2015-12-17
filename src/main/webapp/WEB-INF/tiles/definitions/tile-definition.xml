@@ -73,5 +73,15 @@
 	</definition>
 	
 	
+	<definition name="user/addUpdateUser" extends="baseLayout">
+		<put-attribute name="title" value="Add User" />
+		<put-attribute name="body" value="/WEB-INF/views/user/addUpdateUser.jsp" />
+	</definition>
+	
+	<definition name="user/registerUser" extends="baseLayout-login">
+		<put-attribute name="title" value="Add User" />
+		<put-attribute name="body" value="/WEB-INF/views/user/registerUser.jsp" />
+	</definition>
+	
 	
 </tiles-definitions>

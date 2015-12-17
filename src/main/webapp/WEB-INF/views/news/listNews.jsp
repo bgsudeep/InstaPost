@@ -50,46 +50,8 @@
 					<security:authentication var="principal" property="principal" />
 
 					<security:authorize access="hasRole('ROLE_USER')">
-						<c:if test="${news.user.email eq principal.username }">
-
-							<%-- <form:form action="/magazine/news/add" modelAttribute="magazine">
-								<form:input type="hidden" path="id" id="${news.id}" />
-								<form:input type="hidden" path="title" id="${news.title}" />
-								<form:input type="hidden" path="description" id="${news.description}" />
-								<form:input type="hidden" path="isPublish" id="${news.publish}" />
-								<form:input type="hidden" path="publishDate" id="${news.publishDate}" />
-								<form:input type="hidden" path="category.id" id="${news.category.id}" />
-								<form:input type="hidden" path="user.id" id="${news.user.id}" />
-
-								<form:select path="id">
-									<form:option value="NONE"> --SELECT--</form:option>
-									<form:options items="${listMagazines}" itemLabel="title" itemValue="id" />
-								</form:select>
-
-								<input type="submit" value="Add">
-							</form:form> --%>
-
-
-							<%-- <select name="magazineId">
-								<c:forEach items="${listMagazines}" var="magazine">
-									<option value="${magazine}"
-										${magazine == selectedMagazine ? 'selected' : ''}>${magazine.title}
-										<spring:url value="/magazine/{id}/news/{mag}"
-										var="viewMagazine">
-										<spring:param name="id" value="${news.id}" />
-										<spring:param name="mag" value="${magazine.title}" />
-
-									</spring:url>
-										</option>
-
-									
-								</c:forEach>
-							</select> --%>
-							
-						
-					<%-- <h1>m</h1>${viewMagazine} --%>
-							
-
+						<%-- <c:if test="${news.user.email eq principal.username }"> --%>
+							<c:if test="${!empty listMagazines}">
 							<form:form method="POST" action="/InstaPost/magazine/news/add">
 								<input type="hidden" name="newsId" value='${news.id}' />
 								<select
@@ -101,13 +63,7 @@
 								</select>
 								<input type="submit" value="Add">
 							</form:form>
-
-
-
-
-
-
-
+							</c:if>
 
 							<td width="30%" align="right"><spring:url
 									value="/news/edit/{id}" var="edit">
@@ -118,7 +74,8 @@
 								</spring:url> <a href="${delete}"
 								onclick="return confirm('Are you sure want to delete');">Delete</a>
 							</td>
-						</c:if>
+							
+						<%-- </c:if> --%>
 					</security:authorize>
 
 					<security:authorize access="hasRole('ROLE_ADMIN')">

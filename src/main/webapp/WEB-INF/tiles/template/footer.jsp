@@ -1,1 +1,1 @@
-<p>&copy; S Quartet 2015</p>
+<p>Post a news as you see and share the worlds moments. Enjoy InstaPosting :) &copy; S Quartet 2015</p>

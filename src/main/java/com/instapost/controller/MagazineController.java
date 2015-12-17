@@ -59,13 +59,6 @@ public class MagazineController {
 
 	}
 
-//	@RequestMapping(value = {"/", "/list"}, method = RequestMethod.GET)
-//	public String listMagazine(@ModelAttribute("magazine") Magazine newMazine) {
-//
-//		return "redirect:/magazine/list";
-//
-//	}
-
 	// edit magazine 
 	@RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
 	public String editMagazineform(@ModelAttribute("magazine") Magazine magazine, Model model,
@@ -86,15 +79,6 @@ public class MagazineController {
 
 	}
 
-//	@RequestMapping(value = "/editsaveMagazine", method = RequestMethod.GET)
-//	public String editMagazineSave(@ModelAttribute("magazine") Magazine newMazine) {
-//
-//		return "redirect:/magazine/list";
-//
-//	}
-
-	// delete magazine 
-
 	@RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
 	public String deleteMagazine(Model model, @PathVariable("id") long magzineId) {
 		magazineService.deleteMagazine(magzineId);
@@ -107,8 +91,17 @@ public class MagazineController {
 	@RequestMapping(value = {"/", "/list"}, method = RequestMethod.GET)
 	public String listMagazine(@ModelAttribute("magazine") Magazine magazine, Model model) {
 
+		User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		com.instapost.domain.User userProfile = userService.findUserByEmail(user.getUsername());
+		
+		
 		List<Magazine> magazineList = new ArrayList<Magazine>();
-		magazineList = magazineService.listMagazine();
+		List<Magazine> magazines = magazineService.listMagazine();
+		for (Magazine _magazine : magazines) {
+			if(_magazine.getUser().getId() == userProfile.getId()) {
+				magazineList.add(_magazine);
+			}
+		}
 		model.addAttribute("magazineList", magazineList);
 		return "magazine/magazineDetails";
 	}
@@ -116,7 +109,22 @@ public class MagazineController {
 	@RequestMapping(value = "/{id}/news", method = RequestMethod.GET)
 	public String listNewsOfMagazine(Model model, @PathVariable("id") long magzineId) {
 
+		
+		User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		com.instapost.domain.User userProfile = userService.findUserByEmail(user.getUsername());
+		
+		List<Magazine> magazineList = new ArrayList<Magazine>();
+		List<Magazine> magazines = magazineService.listMagazine();
+		for (Magazine _magazine : magazines) {
+			if(_magazine.getUser().getId() == userProfile.getId()) {
+				magazineList.add(_magazine);
+			}
+		}
+		
+		model.addAttribute("magazineList", magazineList);
+		
 		Magazine magazine = magazineService.findoneMagazine(magzineId);
+		
 		model.addAttribute("magazine", magazine);
 		return "magazine/news";
 	}
@@ -130,9 +138,6 @@ public class MagazineController {
 		
 		newsService.addNews(news);
 		
-//		model.addAttribute("magazine", magazine);
 		return "redirect:/magazine/list";
 	}
-	
-
 }

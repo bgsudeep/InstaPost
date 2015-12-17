@@ -27,7 +27,7 @@ public class Magazine {
 	private String title;
 
 	// @Null
-	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	// @JoinTable
 	@JoinColumn(name = "magazine_id")
 	private List<News> news;

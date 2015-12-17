@@ -11,6 +11,6 @@ public interface NewsService {
 	public List<News> listUnPublishedNews();
 	public News getNewsById(Long id);
 	public News updateNews(News news);
-	public News deleteNews(News news);
+	public void deleteNews(Long id);
 		
 }
