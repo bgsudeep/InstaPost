@@ -68,6 +68,31 @@ public class NewsController {
 		newsService.addNews(news);
 		return "redirect:/news/list";
 	}
+	
+	@RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
+	public String editNews(@ModelAttribute("newNews") News news, @PathVariable("id") long id, Model model) {
+		List<Category> categories = categoryService.listCategory();
+		if(categories.isEmpty()){
+			throw new CategoryNotFoundException();
+		}
+		news = newsService.getNewsById(id);
+		model.addAttribute("newNews", news);
+		
+		model.addAttribute("categories", categories);
+		return "news/addNews";
+	}
+	
+	@RequestMapping(value = "/edit/{id}", method = RequestMethod.POST)
+	public String editNews(@Valid @ModelAttribute("newNews") News news, BindingResult result, Model model) {
+		if (result.hasErrors()) {
+			List<Category> categories = categoryService.listCategory();
+			model.addAttribute("categories", categories);
+			return "news/addNews";
+		}
+	
+		newsService.addNews(news);
+		return "redirect:/news/list";
+	}
 
 	@RequestMapping(value = {"/list", "/"}, method = RequestMethod.GET)
 	public String listNews(@ModelAttribute("newNews") News news, Model model) {
@@ -92,10 +117,15 @@ public class NewsController {
 	}
 	
 	@RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
-	public String deleteNews(Model model, @PathVariable("id") Long newsId) {
-//		News news = newsService.getNewsById(newsId);
-		newsService.deleteNews(newsId);
-
+	public String deleteNews(Model model, @PathVariable("id") Long id) {
+		newsService.deleteNews(id);
 		return "redirect:/news/list";
 	}
+	
+//
+//	@RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
+//	public String deleteNews(Model model, @PathVariable("id") long id) {
+//		newsService.deleteNews(id);
+//		return "redirect:/magazine/list";
+//	}
 }
