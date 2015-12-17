@@ -17,18 +17,19 @@ import com.instapost.domain.Category;
 import com.instapost.service.CategoryService;
 
 @Controller
+@RequestMapping("/category")
 public class CategoryController {
 
 	@Autowired
 	CategoryService categoryService;
 	
-	@RequestMapping(value="/listCategory", method=RequestMethod.GET)
+	@RequestMapping(value={"/", "/list"}, method=RequestMethod.GET)
 	public String listCategory(Model model){
 		model.addAttribute("category", categoryService.listCategory());
 		return "category/listCategory";
 	}
 
-	@RequestMapping(value = "/addCategory", method = RequestMethod.GET)
+	@RequestMapping(value = "/add", method = RequestMethod.GET)
 	public String addCategoryForm(@ModelAttribute("addCategoryForm") Category category, Model model) {		
 		return "category/addCategory";
 
@@ -44,14 +45,14 @@ public class CategoryController {
 //		return "redirect:/listCategory";
 //	}
 	
-	@RequestMapping(value = "/addCategory", method = RequestMethod.POST)
+	@RequestMapping(value = "/add", method = RequestMethod.POST)
 	public @ResponseBody Category saveCategory(@Valid @RequestBody Category category) {
 		
 		return categoryService.addCategory(category);
 		 
 	}
 
-	@RequestMapping(value = "/category_edit/{id}", method = RequestMethod.GET)
+	@RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
 	public String updateCategory(@ModelAttribute("updateCategory") Category category, @PathVariable("id") long id, Model model) {
 		
 		category=categoryService.getCategoryById(id);
@@ -61,10 +62,10 @@ public class CategoryController {
 
 	}
 	
-	@RequestMapping(value="/category_edit/{id}", method = RequestMethod.POST)
+	@RequestMapping(value="/edit/{id}", method = RequestMethod.POST)
 	public String updatedCategory(@ModelAttribute("updateCategory") Category category,@PathVariable("id") long id){
 		categoryService.updateCategory(category);
-		return "redirect:/listCategory";
+		return "redirect:/category/list";
 		
 	}
 	
@@ -76,11 +77,10 @@ public class CategoryController {
 //		return "redirect:/listCategory";		
 //	}
 	
-	@RequestMapping(value="/category_delete/{id}", method=RequestMethod.DELETE)
-	public @ResponseBody boolean deleteCategory(Category category,@PathVariable("id") long id){
+	@RequestMapping(value="/delete/{id}", method=RequestMethod.DELETE)
+	public @ResponseBody boolean deleteCategory(Category category, @PathVariable("id") long id){
 		category.setId(id);
 		categoryService.deleteCategory(category);
 		return true;
-			
 	}
 }

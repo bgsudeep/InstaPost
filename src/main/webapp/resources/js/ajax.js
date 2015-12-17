@@ -1,19 +1,21 @@
 var contextRoot = "/" + window.location.pathname.split('/')[1];
 
 function deleteCategory(id) {
+	
 	if (confirm('Are you sure want to delete')) {
+		
 		$.ajax({
 			type : 'DELETE',
-			url : contextRoot + '/category_delete/' + id,
+			url : contextRoot + '/category/delete/' + id,
 			dataType : "json",
-
+			
 			success : function(result) {
 				$("#" + id).remove();
 
 			},
 
 			error : function(error) {
-				alert("could not delete");
+				alert("Could not delete.");
 			}
 		});
 
@@ -27,8 +29,7 @@ function categorySubmit() {
 	$
 			.ajax({
 				type : 'POST',
-
-				url : contextRoot + '/addCategory',
+				url : contextRoot + '/category/add',
 				dataType : "json",
 				data : dataToSend,
 				contentType : 'application/json',
@@ -37,10 +38,8 @@ function categorySubmit() {
 					$('#errors').html("");
 					$("#success").html("");
 					$("#result-header").html('<H3 align="center"> OKAY!! <H3>');
-					var edit = contextRoot+"/category_edit/"+category.id;
-					var del = contextRoot+"/category_delete/"+category.id;
-//					var editTd = $('a').attr('href', edit);
-//					var delTd = $('a').attr('href', del);
+					var edit = contextRoot+"/category/edit/"+category.id;
+					var del = contextRoot+"/category/delete/"+category.id;
 					$('#categoryTable').append("<tr id="+category.id+"><td>"+category.id+"</td><td >"+category.title+"</td> <td id='edit_"+category.id+"'></td><td id='delete_"+category.id+"'></td> </tr>")
 					$('#result').show();
 					createRefElement("#edit_"+category.id, edit, "Edit", category.id);
@@ -104,6 +103,7 @@ function createRefElement(val, ref, txt, id){
 
 	a.textContent = txt;
 	a.setAttribute('href', "#");
+	alert(a);
 	a.setAttribute('onclick', "deleteCategory("+id+")");	
 	$(val).append(a);
 	console.log(a);

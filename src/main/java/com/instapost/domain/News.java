@@ -143,6 +143,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.validation.constraints.Size;
 
@@ -179,6 +180,17 @@ public class News {
 	
 	private boolean isPublish;
 	
+	@ManyToOne
+	private Magazine magazine;
+	
+	public Magazine getMagazine() {
+		return magazine;
+	}
+
+	public void setMagazine(Magazine magazine) {
+		this.magazine = magazine;
+	}
+
 	private Date publishDate =  new Date();
 
 	public Long getId() {

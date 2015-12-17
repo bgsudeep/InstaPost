@@ -37,4 +37,41 @@
 		<put-attribute name="body" value="/WEB-INF/views/login.jsp" />
 	</definition>
 	
+	<definition name="magazine/magazineform" extends="baseLayout">
+		<put-attribute name="title" value="Add Magazine" />
+		<put-attribute name="body" value="/WEB-INF/views/magazine/magazineform.jsp" />
+	</definition>
+	
+	<definition name="magazine/magazineEditForm" extends="baseLayout">
+		<put-attribute name="title" value="Edit Magazine" />
+		<put-attribute name="body" value="/WEB-INF/views/magazine/magazineEditForm.jsp" />
+	</definition>
+	
+	<definition name="magazine/magazineDetails" extends="baseLayout">
+		<put-attribute name="title" value="Magazine Details" />
+		<put-attribute name="body" value="/WEB-INF/views/magazine/magazineDetails.jsp" />
+	</definition>
+	
+	<definition name="magazine/news" extends="baseLayout">
+		<put-attribute name="title" value="Magazine News" />
+		<put-attribute name="body" value="/WEB-INF/views/magazine/news.jsp" />
+	</definition>
+	
+	<definition name="category/listCategory" extends="baseLayout">
+		<put-attribute name="title" value="Category" />
+		<put-attribute name="body" value="/WEB-INF/views/category/listCategory.jsp" />
+	</definition>
+	
+	<definition name="category/addCategory" extends="baseLayout">
+		<put-attribute name="title" value="Add Category" />
+		<put-attribute name="body" value="/WEB-INF/views/category/addCategory.jsp" />
+	</definition>
+	
+	<definition name="category/updateCategoryForm" extends="baseLayout">
+		<put-attribute name="title" value="Add Category" />
+		<put-attribute name="body" value="/WEB-INF/views/category/updateCategoryForm.jsp" />
+	</definition>
+	
+	
+	
 </tiles-definitions>

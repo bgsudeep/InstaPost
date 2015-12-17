@@ -16,11 +16,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.instapost.domain.Category;
+import com.instapost.domain.Magazine;
 import com.instapost.domain.News;
 import com.instapost.service.CategoryService;
+import com.instapost.service.MagazineService;
 import com.instapost.service.NewsService;
 import com.instapost.service.UserService;
-import com.instapost.service.impl.UserServiceImpl;
 
 @Controller
 @RequestMapping("/news")
@@ -34,6 +35,9 @@ public class NewsController {
 	
 	@Autowired
 	UserService userService;
+	
+	@Autowired
+	MagazineService magazineService;
 
 	@RequestMapping(value = "/add", method = RequestMethod.GET)
 	public String addNews(@ModelAttribute("newNews") News news, Model model) {
@@ -60,8 +64,13 @@ public class NewsController {
 	}
 
 	@RequestMapping(value = {"/list", "/"}, method = RequestMethod.GET)
-	public String listNews(Model model) {
-		model.addAttribute("listNews", newsService.listPublishedNews());
+	public String listNews(@ModelAttribute("newNews") News news, Model model) {
+		List<Magazine> magazineList = magazineService.listMagazine();
+		List<News> newsList = newsService.listPublishedNews();
+
+		model.addAttribute("listNews", newsList);
+		model.addAttribute("listMagazines", magazineList);
+		
 		return "news/listNews";
 	}
 }

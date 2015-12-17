@@ -10,7 +10,7 @@
 <script type="text/javascript"
 	src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
 <script type="text/javascript"
-	src="<spring:url value="resource/js/ajax.js"/>"></script>
+	src="<spring:url value="/resource/js/ajax.js"/>"></script>
 
 </head>
 <body>
@@ -38,7 +38,7 @@
 				<tr id="${category.id}">
 					<td>${category.id}</td>
 					<td>${category.title}</td>
-					<spring:url value="/category_edit/{id}" var="edit">
+					<spring:url value="edit/{id}" var="edit">
 						<spring:param name="id" value="${category.id}" />
 					</spring:url>
 
@@ -68,8 +68,6 @@
 
 		<!-- No action method handled by AJAX-->
 		<form id="categoryForm" method="post">
-
-
 
 			<p>
 				<label for="title"><spring:message

@@ -43,7 +43,7 @@
 		            <form:errors path="category" cssClass="error" />
 		
 		            <form:select id="category" path="category.id">
-		                <form:option value="0" label="--Select Category"/>
+		                <form:option value="0" label="--Select Category--"/>
 		                <form:options items="${categories}" itemLabel="title" itemValue="id"/>
 		            </form:select>
 		        </td>
