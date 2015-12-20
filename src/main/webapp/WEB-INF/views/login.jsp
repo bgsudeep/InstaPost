@@ -5,10 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<!-- <link rel="stylesheet"	href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
- -->
- <!-- <style type="text/css">@import url("<c:url value="/resource/css/instapost.css"/>");</style> -->
- <script type="text/javascript"
+<script type="text/javascript"
 	src="<spring:url value="/resource/js/ajax.js"/>"></script>
 <title>Products</title>
 </head>
@@ -23,7 +20,8 @@
 					</div>
 					<div class="panel-body">
 						<c:if test="${not empty error}">
-							<div class="alert alert-danger">
+							<div class="invalid alert alert-danger">
+								Invalid email or password
 								<br />
 							</div>
 						</c:if>
@@ -33,18 +31,23 @@
 								<div class="form-group">
 									<input class="form:input-large" placeholder="Email"
 										name='email' type="text">
+										<form:errors path="email" cssClass="text-danger" />
 								</div>
 								<div class="form-group">
 									<input class=" form:input-large" placeholder="Password"
 										name='password' type="password" value="">
+										<form:errors path="password" cssClass="text-danger" />
 								</div>
-								<div class = "btn-signin">
+								<div class="btn-signin">
 									<input class="btn btn-lg btn-success btn-mini" type="submit"
-									value="Login"></br>
+										value="Login"></br>
 								</div>
-								
-								<div class ="signup">No account? <a href="<c:url value='/register'/>">Register here.</a></div>
-									
+
+								<div class="signup">
+									No account? <a href="<c:url value='/register'/>">Register
+										here.</a>
+								</div>
+
 							</fieldset>
 						</form>
 					</div>
@@ -52,7 +55,7 @@
 			</div>
 		</div>
 	</div>
-	
+
 	<%-- 
 	<section class="container">
     <div class="login">
@@ -87,8 +90,8 @@
   </section>
   
    --%>
-  
-	
+
+
 
 	<%-- <form action="<spring:url value="/j_spring_security_check" /> method="post">
 		<div class="form-group">

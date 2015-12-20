@@ -15,6 +15,10 @@
 	margin-right:10px;
 }
 
+.invalid {
+	text-align: center;
+}
+
 .header-sub {
 	margin-top: 12px;
 	float: right;

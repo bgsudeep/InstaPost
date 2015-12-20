@@ -56,13 +56,13 @@
 	</div>
 
 	<!-- Success - or Validation errors -->
-	<div id="result" style="display: none; width: 300px; padding:10px; background-color:rgb(213, 213, 213); height: 110px; margin-left: 500px;">
+	<div id="result" style="display: none; width: 300px; padding:10px; background-color:rgb(236, 206, 206); height: 110px; margin-left: 500px;">
 		<p id="result-header"></p>
 		<p id="success"></p>
 		<p id="errors"></p>
 	</div>
 
-	<div id="formInput" style="display: none; background-color: rgb(228, 0, 0); width: 300px; padding:10px; margin-left: 500px;">
+	<div id="formInput" style="display: none; background-color: rgb(224, 144, 144); width: 300px; padding:10px; margin-left: 500px;">
 
 		<h3 align="center">Category</h3>
 

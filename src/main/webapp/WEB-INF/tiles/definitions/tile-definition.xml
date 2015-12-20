@@ -83,5 +83,15 @@
 		<put-attribute name="body" value="/WEB-INF/views/user/registerUser.jsp" />
 	</definition>
 	
+	<definition name="news/editNews" extends="baseLayout">
+		<put-attribute name="title" value="Add User" />
+		<put-attribute name="body" value="/WEB-INF/views/news/editNews.jsp" />
+	</definition>
+	
+	<definition name="user/listUsers" extends="baseLayout">
+		<put-attribute name="title" value="List User" />
+		<put-attribute name="body" value="/WEB-INF/views/user/listUsers.jsp" />
+	</definition>
+	
 	
 </tiles-definitions>

@@ -66,13 +66,12 @@ public class UserController {
 	 * @return addUpdateUser.jsp view
 	 */
 	@RequestMapping(value = "/save", method = RequestMethod.POST)
-	public String addUser(@Valid @ModelAttribute("user") User user, BindingResult result, Model model) {
+	public String saveUser(@Valid @ModelAttribute("user") User user, BindingResult result, Model model) {
 		
 		//check for the creating a new user or updating a user
-		
 		if(user.getId() == null) {
+
 			//new employee, add it
-			
 			if(result.hasErrors()) {
 				List<Role> roles = new ArrayList<Role>();
 				Role role = roleService.getRoleById(ROLE_USER);
@@ -158,10 +157,24 @@ public class UserController {
 			}
 		}
 		
-		
 		userService.delete(user);
 		
-		return "redirect:/welcome";
+		return "redirect:/user/list";
+	}
+	
+	/*
+	 * GET request for listing of the users
+	 * @param user User Entity
+	 * @param model holder for model attribute
+	 * @return listUsers.jsp view
+	 */
+	@RequestMapping(value = "/list", method = RequestMethod.GET)
+	public String listUser(Model model) {
+		List<User> users = userService.findAll();
+
+		model.addAttribute("listUser", users);
+
+		return "user/listUsers";
 	}
 	
 	

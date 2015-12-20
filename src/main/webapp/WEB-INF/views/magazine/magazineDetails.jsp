@@ -9,18 +9,17 @@
 <title>Insert title here</title>
 </head>
 <body>
-
 	
+	<h2>List of Magazines</h2>
 	<div align="right">
 			<a href="<spring:url value='add'/>">Add Magazine</a>
 		</div>
 	
-	<table>
-		<tr style="width: 100%; border: 1px; border-color: solid:black;">
+	<table border="1" style="width: 100%; ">
+		<tr align="left">
 			<th>Title</th>
 			<th>Post Date</th>
-			<th>User Id</th>
-			<th>Action</th>
+			<th colspan="2">Action</th>
 		</tr>
 		<c:forEach items="${magazineList}" var="magazine">
 		
@@ -32,7 +31,6 @@
 				${magazine.title}</a></td>
 				<td>${magazine.postDate}
 				</td>
-				<td>${magazine.user.id}</td>
 
 
 				<!-- Spring:url for handling Spring template/@PathVariable -->
